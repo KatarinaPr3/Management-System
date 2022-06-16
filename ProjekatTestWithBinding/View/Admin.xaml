@@ -1,0 +1,180 @@
+﻿<UserControl x:Class="ProjekatTestWithBinding.View.Admin"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ProjekatTestWithBinding.View"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <Style x:Key="ListView" TargetType="{x:Type ListView}">
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="Foreground" Value="#0f0f2d"/>
+        </Style>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition MaxHeight="250"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="30"/>
+        </Grid.RowDefinitions>
+        <ListView Grid.Row="0" ItemsSource="{Binding Users}" Style="{StaticResource ListView}">
+
+            <ListView.View>
+                <GridView>
+
+                        <GridView.Columns>
+
+                        <GridViewColumn Header="Emp ID" DisplayMemberBinding="{Binding empid}" Width="70">
+                        </GridViewColumn>
+                        <GridViewColumn Header="First Name" DisplayMemberBinding="{Binding name}" Width="70"/>
+                            <GridViewColumn Header="Last Name" DisplayMemberBinding="{Binding lastname}" Width="70"/>
+                            <GridViewColumn Header="Role" DisplayMemberBinding="{Binding role}" Width="100"/>
+                            <GridViewColumn Header="Username" DisplayMemberBinding="{Binding username}" Width="70"/>
+                            <GridViewColumn Header="Password" DisplayMemberBinding="{Binding password}" Width="70"/>
+                            <GridViewColumn Header="Status" DisplayMemberBinding="{Binding status}" Width="70"/>
+                            <GridViewColumn Header="Action" Width="220">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Orientation="Horizontal" Margin="5">
+                                            <Button x:Name="BtnUpdate" Command="{Binding DataContext.UpdateCommand, RelativeSource={RelativeSource AncestorType={x:Type ListView}}}" CommandParameter="{Binding }" Content="Update" Width="60" Height="25" Margin="10 0 0 0"/>
+                                            <Button x:Name="BtnDelete" Command="{Binding DataContext.DeleteCommand, RelativeSource={RelativeSource AncestorType={x:Type ListView}}}" CommandParameter="{Binding}" Content="Delete" Width="60" Height="25" Margin="10 0 0 0"/>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                        </GridView.Columns>
+                    </GridView>
+            </ListView.View>
+        </ListView>
+        <Grid Grid.Row="1" Background="#0f0f2d">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Border Grid.Column="0" BorderBrush="Pink" Margin="5">
+                <StackPanel Margin="5">
+                    <Label Content="ADD NEW USER" HorizontalAlignment="Center"  Foreground="White" FontSize="20"/>
+                    <Grid Margin="5">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Label Grid.Row="0" Grid.Column="0" Content="Employee ID" HorizontalAlignment="Right" Foreground="White"/>
+                        <ComboBox ItemsSource="{Binding FreeEmployees}" Text="{Binding EmpId}" Grid.Row="0" Grid.Column="1" Margin="0 2" IsReadOnly="True" VerticalContentAlignment="Center"/>
+                        <Label Grid.Row="1" Grid.Column="0" Content="First Name" HorizontalAlignment="Right" Foreground="White"/>
+                        <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding  UserAdding.name}" IsReadOnly="True" Margin="0 2" VerticalContentAlignment="Center"/>
+                        <Label Grid.Row="2" Grid.Column="0" Content="Last Name" HorizontalAlignment="Right" Foreground="White"/>
+                        <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding  UserAdding.lastname}" IsReadOnly="True" Margin="0 2" VerticalContentAlignment="Center"/>
+                        <Label Grid.Row="3" Grid.Column="0" Content="Role" HorizontalAlignment="Right" Foreground="White"/>
+                        <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding UserAdding.role}" IsReadOnly="True" Margin="0 2" VerticalContentAlignment="Center"/>
+                        <Label Grid.Row="4" Grid.Column="0" Content="Username" HorizontalAlignment="Right" Foreground="White"/>
+                        <TextBox Grid.Row="4" Grid.Column="1" Text="{Binding  UserAdding.username}" Margin="0 2" VerticalContentAlignment="Center"/>
+                        <Label Grid.Row="5" Grid.Column="0" Content="Password" HorizontalAlignment="Right" Foreground="White"/>
+                        <TextBox Grid.Row="5" Grid.Column="1" Text="{Binding  UserAdding.password}" Margin="0 2" VerticalContentAlignment="Center"/>
+                        <Label Grid.Row="6" Grid.Column="0" Content="Status" HorizontalAlignment="Right" Foreground="White"/>
+                        <ComboBox Grid.Row="6" Grid.Column="1" ItemsSource="{Binding StatusChoose}" Text="{Binding UserAdding.status}" Margin="0 2" VerticalContentAlignment="Center"/>
+                        <Button Grid.Row="7" Grid.ColumnSpan="2" Content="Add" Margin="5" Command="{Binding AddUserCommand}" Width="150" Height="30" >
+                            <!--#region Button style-->
+                            <Button.Style>
+                                <Style TargetType="Button">
+                                    <Setter Property="Background" Value="Pink"/>
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Opacity" Value="1"/>
+                                        </Trigger>
+                                        <Trigger Property="IsMouseOver" Value="False">
+                                            <Setter Property="Opacity" Value="0.9"/>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Button.Style>
+                            <Button.Template>
+                                <ControlTemplate TargetType="Button">
+                                    <Border CornerRadius="15,15,15,15" BorderBrush="Pink" Background="#fff" BorderThickness="0,2,3,1" >
+                                        <ContentPresenter x:Name="contentPresenter" ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                                    </Border>
+                                </ControlTemplate>
+                            </Button.Template>
+                            <!--#endregion Button style-->
+                        </Button>
+                    </Grid>
+                </StackPanel>
+            </Border>
+            <Border Grid.Column="1" BorderBrush="Pink" Margin="5">
+                <StackPanel Margin="5">
+                    <Label Content="UPDATE USER" HorizontalAlignment="Center" Foreground="White" FontSize="20"/>
+                    <Grid Margin="5">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <TextBlock Grid.Row="0" Height="20"/>
+                        <Label Grid.Row="1" Grid.Column="0" Content="First Name" HorizontalAlignment="Right" Foreground="White"/>
+                        <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding  SelectedUser.name}" IsReadOnly="True" Margin="0 2" VerticalContentAlignment="Center"/>
+                        <Label Grid.Row="2" Grid.Column="0" Content="Last Name" HorizontalAlignment="Right" Foreground="White"/>
+                        <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding  SelectedUser.lastname}" IsReadOnly="True" Margin="0 2" VerticalContentAlignment="Center"/>
+                        <Label Grid.Row="3" Grid.Column="0" Content="Role" HorizontalAlignment="Right" Foreground="White"/>
+                        <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding SelectedUser.role}" IsReadOnly="True" Margin="0 2" VerticalContentAlignment="Center"/>
+                        <Label Grid.Row="4" Grid.Column="0" Content="Username" HorizontalAlignment="Right" Foreground="White"/>
+                        <TextBox Grid.Row="4" Grid.Column="1" Text="{Binding  SelectedUser.username}" Margin="0 2" VerticalContentAlignment="Center"/>
+                        <Label Grid.Row="5" Grid.Column="0" Content="Password" HorizontalAlignment="Right" Foreground="White"/>
+                        <TextBox Grid.Row="5" Grid.Column="1" Text="{Binding  SelectedUser.password}" Margin="0 2" VerticalContentAlignment="Center"/>
+                        <Label Grid.Row="6" Grid.Column="0" Content="Status" HorizontalAlignment="Right" Foreground="White"/>
+                        <ComboBox Grid.Row="6" Grid.Column="1" ItemsSource="{Binding StatusChoose}" Text="{Binding SelectedUser.status}" Margin="0 2" VerticalContentAlignment="Center"/>
+                        <Button Grid.Row="7" Grid.ColumnSpan="2" Content="Update" Margin="5" Command="{Binding UpdateUserCommand}" Width="150" Height="30">
+                            <Button.Style>
+                                <Style TargetType="Button">
+                                    <Setter Property="Background" Value="White"/>
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Opacity" Value="1"/>
+                                        </Trigger>
+                                        <Trigger Property="IsMouseOver" Value="False">
+                                            <Setter Property="Opacity" Value="1"/>
+                                        </Trigger>
+                                    </Style.Triggers>
+
+                                </Style>
+                            </Button.Style>
+                            <Button.Template>
+                                <ControlTemplate TargetType="Button">
+                                    <Border CornerRadius="15,15,15,15" BorderBrush="Pink" Background="White" BorderThickness="0,2,3,1" >
+                                        <ContentPresenter x:Name="contentPresenter" ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                                    </Border>
+                                </ControlTemplate>
+                            </Button.Template>
+
+                        </Button>
+
+                    </Grid>
+                </StackPanel>
+            </Border>
+        </Grid>
+        <Grid Grid.Row="2" Background="#0f0f2d">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <Button Content="Logout" Command="{Binding LogoutCommand}" BorderThickness="0"  Width="100" Foreground="White" Background="#0f0f2d" FontSize="16"/>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</UserControl>

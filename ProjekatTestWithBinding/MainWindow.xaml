@@ -1,0 +1,98 @@
+﻿<Window x:Class="ProjekatTestWithBinding.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:vm ="clr-namespace:ProjekatTestWithBinding.ViewModel"
+        xmlns:vmSecond ="clr-namespace:ProjekatTestWithBinding.ViewModel.SalesEmployee"
+        xmlns:vmThirdd ="clr-namespace:ProjekatTestWithBinding.ViewModel.Admin"
+        xmlns:view="clr-namespace:ProjekatTestWithBinding.View"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ProjekatTestWithBinding"
+        mc:Ignorable="d"
+        WindowStartupLocation="CenterScreen"
+        Title="Test DOO System Management" Height="450" Width="800">
+    <Grid>
+        <Grid>
+            <ContentControl Content="{Binding CurrentViewModel}">
+                <ContentControl.Resources>
+                    <DataTemplate DataType="{x:Type vm:LoginViewModel}">
+                        <view:LoginView/>
+                    </DataTemplate>
+                    <DataTemplate DataType="{x:Type vm:HREmployeeVM}">
+                        <view:HREmployeeView/>
+                    </DataTemplate>
+                    <DataTemplate DataType="{x:Type vm:HREmployeeInsertViewModel}">
+                        <view:HREmpoyeeInsertNewEmpView/>
+                    </DataTemplate>
+                    <DataTemplate DataType="{x:Type vm:HREmployeeUpdateViewModel}">
+                        <view:HREmployeeUpdate/>
+                    </DataTemplate>
+                    <DataTemplate DataType="{x:Type vm:LogisticEmployeeViewModel}">
+                        <view:LogisticEmployee/>
+                    </DataTemplate>
+                    <DataTemplate DataType="{x:Type vm:LogisticEmployeeInsertViewModel}">
+                        <view:LogisticEmployeeInsertShipper/>
+                    </DataTemplate>
+                    <DataTemplate DataType="{x:Type vm:LogisticEmployeeViewAllShippersViewModel}">
+                        <view:LogisticEmployeeViewAll/>
+                    </DataTemplate>
+                    <DataTemplate DataType="{x:Type vm:LogisticManagerViewModel}">
+                        <view:LogisticManager/>
+                    </DataTemplate>
+                    <DataTemplate DataType="{x:Type vm:LogisticManagerOrdersViewModel}">
+                        <view:LogisticManagerOrders/>
+                    </DataTemplate>
+                    <DataTemplate DataType="{x:Type vm:SalesManagerViewModel}">
+                        <view:SalesManager/>
+                    </DataTemplate>
+                    <DataTemplate DataType="{x:Type vm:SalesManagerOrdersViewModel}">
+                        <view:SalesManagerOrders/>
+                    </DataTemplate>
+                    <DataTemplate DataType="{x:Type vm:ProductsManagerViewModel}">
+                        <view:ProductsManagerView/>
+                    </DataTemplate>
+                    <DataTemplate DataType="{x:Type vm:ProductsManagerOrdersViewModel}">
+                        <view:ProductsManagerOrdersView/>
+                    </DataTemplate>
+                    <DataTemplate DataType="{x:Type vm:ProductsEmployeeViewModel}">
+                        <view:ProductsEmployee/>
+                    </DataTemplate>
+                    <DataTemplate DataType="{x:Type vm:ProductsEmployeeInsertProductViewModel}">
+                        <view:ProductsEmployeeInsertProduct/>
+                    </DataTemplate>
+                    <DataTemplate DataType="{x:Type vm:ProductsEmployeeUpdateProductViewModel}">
+                        <view:ProductsEmployeeUpdateProduct/>
+                    </DataTemplate>
+                    <DataTemplate DataType="{x:Type vm:ProductsEmployeeInsertSupplierViewModel}">
+                        <view:ProductsEmployeeInsertSupplier/>
+                    </DataTemplate>
+                    <DataTemplate DataType="{x:Type vm:ProductsEmployeeUpdateSupplierViewModel}">
+                        <view:ProductsEmployeeUpdateSupplier/>
+                    </DataTemplate>
+                    <DataTemplate DataType="{x:Type vmSecond:SalesEmployeeViewModel}">
+                        <view:SalesEmployee/>
+                    </DataTemplate>
+                    <DataTemplate DataType="{x:Type vmSecond:SalesEmployeeInsertOrderViewModel}">
+                        <view:SalesEmployeeInsertOrder/>
+                    </DataTemplate>
+                    <DataTemplate DataType="{x:Type vmSecond:SalesEmployeeFillOrderViewModel}">
+                        <view:SalesEmployeeFillOrder/>
+                    </DataTemplate>
+                    <DataTemplate DataType="{x:Type vmSecond:SalesEmployeeInsertCustomerViewModel}">
+                        <view:SalesEmployeeInsertCustomer/>
+                    </DataTemplate>
+                    <DataTemplate DataType="{x:Type vmSecond:SalesEmployeeUpdateCustomerAddressViewModel}">
+                        <view:SalesEmployeeUpdateCustomersAddress/>
+                    </DataTemplate>
+                    <DataTemplate DataType="{x:Type vmThirdd:AdminViewModel}">
+                        <view:Admin/>
+                    </DataTemplate>
+                </ContentControl.Resources>
+
+            </ContentControl>
+        </Grid>
+    </Grid>
+    
+    
+    
+</Window>
